@@ -1,6 +1,7 @@
 #pragma once
 #pragma once
 #include "Usuarios.h"
+#include "Vector.h"
 template <typename Tipo>
 class Controladora {
 	Lista<Tipo*> U;
@@ -90,13 +91,14 @@ public:
 				break;
 			}
 			case 3: {
-				float dolarvalores[2] = { 3.7180,3.7480 }; 
-				//vector con los valores de compra y venta respectivamente
+				Vector<float> dolarvalores;
+            	dolarvalores.pushback(3.7180);
+            	dolarvalores.pushback(3.7480);
 				float dinero = 0;
 				float cambio = 0;
 
 				cout << "       Menu de OPERACIONES " << endl;
-				cout << "Dolar compra: " << dolarvalores[0] << "  Dolar venta: " << dolarvalores[1] << endl;
+				cout << "Dolar compra: " << dolarvalores.pos(0) << "  Dolar venta: " << dolarvalores.pos(1) << endl;
 				cout << "\n �Que operacion de cambio deseas realizar?";
 				cout << "\n 1. Cambio de soles a dolares";
 				cout << "\n 2. Cambio de dolares a soles";
@@ -108,13 +110,13 @@ public:
 				case 1:
 					cout << "Ingrese la cantidad de soles a cambiar: ";
 					cin >> dinero;
-					cambio = dinero / (dolarvalores[1]);
+					cambio = dinero / (dolarvalores.pos(1));
 					cout << "Su cambio es: " << cambio << " dolares";
 					break;
 				case 2:
 					cout << "Ingrese la cantidad de dolares a cambiar: ";
 					cin >> dinero;
-					cambio = dinero * (dolarvalores[0]);
+					cambio = dinero * (dolarvalores.pos(0));
 
 					cout << "Su cambio es: " << cambio  << " soles";
 					break;

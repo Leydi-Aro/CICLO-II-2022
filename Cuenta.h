@@ -1,8 +1,9 @@
 #pragma once
 #include "Lambda.h"
+#include "Vector.h"
 class Cuenta {
     string Banco;
-    string Moneda;//string Comentario;
+    string Moneda;
     float Monto;
 
 public:
@@ -67,7 +68,9 @@ public:
         {
             system("cls");
 
-            float dolarvalores[2] = { 3.7180,3.7480 };
+            Vector<float> dolarvalores;
+            dolarvalores.pushback(3.7180);
+            dolarvalores.pushback(3.7480);
 
             cout << "Nombre del archivo: " << Banco << endl;
             cout << "Tipo de Moneda: " << Moneda << endl << endl;
@@ -76,7 +79,7 @@ public:
 
             cout << "  $$   Realizar Operacion  $$" << endl;
             cout << "-------------------------------------                         " << endl;
-            cout << "Dolar compra: " << dolarvalores[0] << "  Dolar venta: " << dolarvalores[1] << endl;
+            cout << "Dolar compra: " << dolarvalores.pos(0) << "  Dolar venta: " << dolarvalores.pos(1) << endl;
             cout<<  "1. - Visualizar Cuenta" << endl;
             cout << "2. - EXCHANGE--->  Cambio de soles a dolares (VENTA)" << endl;
             cout << "3. - EXCHANGE--->  Cambio de dolares a soles (COMPRA)" << endl;
@@ -91,11 +94,11 @@ public:
                 cin.get();
                 break;
             case 2:
-                operacionVenta(dolarvalores[0]);
+                operacionVenta(dolarvalores.pos(0));
                 getch();
                 break;
             case 3:
-                operacionCompra(dolarvalores[1]);
+                operacionCompra(dolarvalores.pos(1));
                 getch();
                 break;
             case 4:
