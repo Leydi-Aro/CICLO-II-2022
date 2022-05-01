@@ -69,7 +69,7 @@ public:
 		short opcion;
 		while (run)
 		{
-			system("cls");
+			system(CLEAR);
 			cout << " ||||||||||||||||||| B I E N V E N I D O S   A |||||||||||||" << endl;
 			cout << "                       $$ E X C H A N G E $$              " << endl;
 			cout << "                        " << endl;
