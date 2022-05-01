@@ -1,3 +1,5 @@
+#if defined(WIN32)
+#else
 #include <unistd.h>
 #include <termios.h>
 #include <stdio.h>
@@ -23,4 +25,5 @@ char getch(void)
         perror("tcsetattr ~ICANON");
     printf("%c\n", buf);
     return buf;
- }
+}
+#endif
