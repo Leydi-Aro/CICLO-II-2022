@@ -78,7 +78,8 @@ public:
 			cout << "1. - Crear nuevo usuario" << endl;
 			cout << "2. - Seleccionar usuario " << endl;
 			cout << "3. - Visualizar cambio sin cuenta" << endl;
-			cout << "4. - Salir" << endl;
+			cout << "4. - Historial de Usuarios Antiguos" << endl;
+			cout << "5. - Salir" << endl;
 			cin >> opcion;
 
 			switch (opcion) {
