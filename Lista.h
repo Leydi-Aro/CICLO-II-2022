@@ -28,7 +28,10 @@ public:
             fin = n;
         }
     }
-    void mostrar() {
+    void mostrar(const function<void(Tipo)>& criterio = [](Tipo e){ 
+															std::cout << e << "\n"; 
+														} ) {
+
         Nodo<Tipo>* aux = inicio;
         while (aux->siguiente != nullptr) {
             cout << aux->elemento << " ";
@@ -41,4 +44,53 @@ public:
     void resetit() { It = inicio; }         
     Tipo getIt() { return It->elemento; }   
     Tipo getFin() { return fin->elemento; } 
+	
+	void quick_sort(const function<bool(Tipo, Tipo)>& f = [](Tipo a, Tipo b){ return a > b; }) {
+		_quick_sort(inicio, fin, f);
+	}
+
+
+private:
+	Nodo<Tipo>* parition(Nodo<Tipo> *first, Nodo<Tipo> *last, const function<bool(Tipo, Tipo)>& f)
+	{
+		//Get first node of given linked list
+		Nodo<Tipo> *pivot = first;
+		Nodo<Tipo> *front = first;
+		int temp = 0;
+		while (front != nullptr && front != last)
+		{
+			if (f(front->elemento, last->elemento))
+			{
+				pivot = first;
+				//Swap node elemento
+				temp = first->elemento;
+				first->elemento = front->elemento;
+				front->elemento = temp;
+				//Visit to next node
+				first = first->siguiente;
+			}
+			//Visit to next node
+			front = front->siguiente;
+		}
+		//Change last node elemento to current node
+		temp = first->elemento;
+		first->elemento = last->elemento;
+		last->elemento = temp;
+		return pivot;
+	}
+	void _quick_sort(Nodo<Tipo>* first, Nodo<Tipo>* last, const function<bool(Tipo, Tipo)>& f) {
+		if (first == last)
+		{
+			return;
+		}
+		Nodo<Tipo> *pivot = parition(first, last, f);
+		if (pivot != NULL && pivot->siguiente != NULL)
+		{
+			_quick_sort(pivot->siguiente, last, f);
+		}
+		if (pivot != NULL && first != pivot)
+		{
+			_quick_sort(first, pivot, f);
+		}
+	}
 };

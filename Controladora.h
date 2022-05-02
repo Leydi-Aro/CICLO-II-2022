@@ -81,64 +81,63 @@ public:
 			cout << "4. - Salir" << endl;
 			cin >> opcion;
 
-			switch (opcion)
-			{
-			case 1: {
-				CrearUsuario();
-				break; }
-			case 2: {
-				SelecUsuario();
-				break;
-			}
-			case 3: {
-				Vector<float> dolarvalores;
-            	dolarvalores.pushback(3.7180);
-            	dolarvalores.pushback(3.7480);
-				float dinero = 0;
-				float cambio = 0;
-
-				cout << "       Menu de OPERACIONES " << endl;
-				cout << "Dolar compra: " << dolarvalores.pos(0) << "  Dolar venta: " << dolarvalores.pos(1) << endl;
-				cout << "\n �Que operacion de cambio deseas realizar?";
-				cout << "\n 1. Cambio de soles a dolares";
-				cout << "\n 2. Cambio de dolares a soles";
-				cout << "\n 3. Salir";
-				cout << "\n";
-				cin >> opcion;
-
-				switch (opcion) {
-				case 1:
-					cout << "Ingrese la cantidad de soles a cambiar: ";
-					cin >> dinero;
-					cambio = dinero / (dolarvalores.pos(1));
-					cout << "Su cambio es: " << cambio << " dolares";
-					break;
-				case 2:
-					cout << "Ingrese la cantidad de dolares a cambiar: ";
-					cin >> dinero;
-					cambio = dinero * (dolarvalores.pos(0));
-
-					cout << "Su cambio es: " << cambio  << " soles";
-					break;
-				case 3:
-					cout << "Gracias por usar EXCHANGE";
+			switch (opcion) {
+				case 1: {
+					CrearUsuario();
+					break; 
+				}
+				case 2: {
+					SelecUsuario();
 					break;
 				}
-				getch();
-				break;
-			}
-			case 4: {
-				GuardarUsuarios();
-				U.resetit();
-				while (U.It->siguiente != nullptr)
-				{
-					if (U.It == nullptr) break;
-					U.getIt()->GuardarArchivos();
-					U.iterar();
-				}U.getFin()->GuardarArchivos();
-				run = false;
-				break;
-			}
+				case 3: {
+					Vector<float> dolarvalores;
+					dolarvalores.pushback(3.7180);
+					dolarvalores.pushback(3.7480);
+					float dinero = 0;
+					float cambio = 0;
+
+					cout << "       Menu de OPERACIONES " << endl;
+					cout << "Dolar compra: " << dolarvalores.pos(0) << "  Dolar venta: " << dolarvalores.pos(1) << endl;
+					cout << "\n �Que operacion de cambio deseas realizar?";
+					cout << "\n 1. Cambio de soles a dolares";
+					cout << "\n 2. Cambio de dolares a soles";
+					cout << "\n 3. Salir";
+					cout << "\n";
+					cin >> opcion;
+
+					switch (opcion) {
+					case 1:
+						cout << "Ingrese la cantidad de soles a cambiar: ";
+						cin >> dinero;
+						cambio = dinero / (dolarvalores.pos(1));
+						cout << "Su cambio es: " << cambio << " dolares";
+						break;
+					case 2:
+						cout << "Ingrese la cantidad de dolares a cambiar: ";
+						cin >> dinero;
+						cambio = dinero * (dolarvalores.pos(0));
+
+						cout << "Su cambio es: " << cambio  << " soles";
+						break;
+					case 3:
+						cout << "Gracias por usar EXCHANGE";
+						break;
+					}
+					break;
+				}
+				case 4: {
+					GuardarUsuarios();
+					U.resetit();
+					while (U.It->siguiente != nullptr)
+					{
+						if (U.It == nullptr) break;
+						U.getIt()->GuardarArchivos();
+						U.iterar();
+					}U.getFin()->GuardarArchivos();
+					run = false;
+					break;
+				}
 			}
 		}
 	}
