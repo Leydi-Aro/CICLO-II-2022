@@ -99,7 +99,7 @@ public:
 
 					cout << "       Menu de OPERACIONES " << endl;
 					cout << "Dolar compra: " << dolarvalores.pos(0) << "  Dolar venta: " << dolarvalores.pos(1) << endl;
-					cout << "\n �Que operacion de cambio deseas realizar?";
+					cout << "\n ¿Que operacion de cambio deseas realizar?";
 					cout << "\n 1. Cambio de soles a dolares";
 					cout << "\n 2. Cambio de dolares a soles";
 					cout << "\n 3. Salir";
@@ -126,7 +126,46 @@ public:
 					}
 					break;
 				}
-				case 4: {
+					case 4: {
+					Vector<Historial> datos;
+					datos.pushback(Historial("Claudia", 340000000, "BCP"));
+					datos.pushback(Historial("Pedro", 450000000, "INTERBANK"));
+					datos.pushback(Historial("Sofia", 120000000, "SCOTIABANK"));
+					datos.pushback(Historial("Pablo", 230000000, "BBVA"));
+					datos.pushback(Historial("Marcela", 560000000, "BANBIF"));
+					datos.pushback(Historial("Roberto", 780000000, "PRESTASUR"));
+					datos.pushback(Historial("Valentin", 670000000, "FINANCIERO"));
+					datos.pushback(Historial("Xiomara", 890000000, "CONTINENTAL"));
+
+					//auto compare= [](Datos i, Datos j)->bool {return i < j; };
+					auto comparar = [](Historial i, Historial j)->bool {return i > j; };
+					auto y = [](Historial c) { cout << c; };
+
+					cout << "-----------H I S T O R I A L    D E    U S U A R I O S----------------" << endl;
+					datos.ver(y);
+
+					cout << "----------------ORDENAMINETO BURBUJA-------------------" << endl;
+					//cout << "-----------------Ordena a la derecha--------------------" << endl;
+					datos.OrdenamientoBurbuja(comparar);
+					datos.ver(y);
+
+					cout << "------------------------ORDENAMIENTO INTERCAMBIO----------------" << endl;
+					//cout << "-------------------------Ordena a la izquierda--------------------" << endl;
+					datos.OrdenamientoIntercambio(comparar);
+					datos.ver(y);
+
+					cout << "------------------------ORDENAMIENTO ALEATORIO----------------" << endl;
+					//cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
+					datos.fisher_yates();
+					datos.ver(y);
+
+					cout << endl;
+
+
+				getch();
+				break;
+				}
+				case 5: {
 					GuardarUsuarios();
 					U.resetit();
 					while (U.It->siguiente != nullptr)

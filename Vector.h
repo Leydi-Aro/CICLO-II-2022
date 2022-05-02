@@ -16,7 +16,7 @@ public:
     // Tipo pos;
     Vector()
     {
-        capacidad = 2;
+        capacidad = 9;
         size = 0;
         arr = new T[capacidad];
     };
@@ -51,11 +51,44 @@ public:
         return arr[pos];
     }
 
-    void mostrar()
+    /*  void mostrar()
     {
         for (size_t i = 0; i < size; ++i)
         {
             cout << (arr[i]) << " ";
+        }
+    }*/
+
+    void ver(function<void(T)>c) {
+        for (size_t i = 0; i < size; ++i) {
+            c(arr[i]);
+        }
+    }
+
+    void fisher_yates(){
+        for(int i = size-1; i>0; i--){
+            int j = (rand()% (i +1));
+            swap(&arr[j],&arr[i]);
+        }
+    }
+
+    void OrdenamientoBurbuja(function<bool(T, T)>c) {
+        for (size_t i = 0; i < size - 1; ++i) {
+            for (size_t j = 0; j < size - 1 - i; ++j) {
+                if (c(arr[j], arr[j + 1]))
+                    swap(&arr[j], &arr[j + 1]);
+
+            }
+        }
+    }
+
+    void OrdenamientoIntercambio(function<bool(T, T)>c) {
+        for (size_t i = 0; i < size - 1; i++) {
+            for (size_t j = i + 1; j < size; j++) {
+                if (c(arr[i], arr[j])) {
+                    swap(&arr[i], &arr[j]);
+                }
+            }
         }
     }
 };
