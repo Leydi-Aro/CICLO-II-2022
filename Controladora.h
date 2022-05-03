@@ -2,6 +2,7 @@
 #pragma once
 #include "Usuarios.h"
 #include "Vector.h"
+#include "Historial.h"
 template <typename Tipo>
 class Controladora {
 	Lista<Tipo*> U;
@@ -54,6 +55,8 @@ public:
 		} if (U.getFin()->getname() == temp) U.getFin()->menuUser();
 	}
 	void mostrarUsuarios() {  
+		// Ordenar por orden alfabetico usando quicksort
+		U.quick_sort([](Usuario* a, Usuario* b) { return a->getname() < b->getname(); });
 		U.resetit();
 		while (U.It->siguiente != nullptr)
 		{
@@ -127,41 +130,40 @@ public:
 					}
 					break;
 				}
-					case 4: {
-					Vector<Historial> datos;
-					datos.pushback(Historial("Claudia", 340000000, "BCP"));
-					datos.pushback(Historial("Pedro", 450000000, "INTERBANK"));
-					datos.pushback(Historial("Sofia", 120000000, "SCOTIABANK"));
-					datos.pushback(Historial("Pablo", 230000000, "BBVA"));
-					datos.pushback(Historial("Marcela", 560000000, "BANBIF"));
-					datos.pushback(Historial("Roberto", 780000000, "PRESTASUR"));
-					datos.pushback(Historial("Valentin", 670000000, "FINANCIERO"));
-					datos.pushback(Historial("Xiomara", 890000000, "CONTINENTAL"));
+				case 4: {
+				Vector<Historial> datos;
+				datos.pushback(Historial("Claudia", 340000000, "BCP"));
+				datos.pushback(Historial("Pedro", 450000000, "INTERBANK"));
+				datos.pushback(Historial("Sofia", 120000000, "SCOTIABANK"));
+				datos.pushback(Historial("Pablo", 230000000, "BBVA"));
+				datos.pushback(Historial("Marcela", 560000000, "BANBIF"));
+				datos.pushback(Historial("Roberto", 780000000, "PRESTASUR"));
+				datos.pushback(Historial("Valentin", 670000000, "FINANCIERO"));
+				datos.pushback(Historial("Xiomara", 890000000, "CONTINENTAL"));
 
-					//auto compare= [](Datos i, Datos j)->bool {return i < j; };
-					auto comparar = [](Historial i, Historial j)->bool {return i > j; };
-					auto y = [](Historial c) { cout << c; };
+				//auto compare= [](Datos i, Datos j)->bool {return i < j; };
+				auto comparar = [](Historial i, Historial j)->bool {return i > j; };
+				auto y = [](Historial c) { cout << c; };
 
-					cout << "-----------H I S T O R I A L    D E    U S U A R I O S----------------" << endl;
-					datos.ver(y);
+				cout << "-----------H I S T O R I A L    D E    U S U A R I O S----------------" << endl;
+				datos.ver(y);
 
-					cout << "----------------ORDENAMINETO BURBUJA-------------------" << endl;
-					//cout << "-----------------Ordena a la derecha--------------------" << endl;
-					datos.OrdenamientoBurbuja(comparar);
-					datos.ver(y);
+				cout << "----------------ORDENAMINETO BURBUJA-------------------" << endl;
+				//cout << "-----------------Ordena a la derecha--------------------" << endl;
+				datos.OrdenamientoBurbuja(comparar);
+				datos.ver(y);
 
-					cout << "------------------------ORDENAMIENTO INTERCAMBIO----------------" << endl;
-					//cout << "-------------------------Ordena a la izquierda--------------------" << endl;
-					datos.OrdenamientoIntercambio(comparar);
-					datos.ver(y);
+				cout << "------------------------ORDENAMIENTO INTERCAMBIO----------------" << endl;
+				//cout << "-------------------------Ordena a la izquierda--------------------" << endl;
+				datos.OrdenamientoIntercambio(comparar);
+				datos.ver(y);
 
-					cout << "------------------------ORDENAMIENTO ALEATORIO----------------" << endl;
-					//cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
-					datos.fisher_yates();
-					datos.ver(y);
+				cout << "------------------------ORDENAMIENTO ALEATORIO----------------" << endl;
+				//cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
+				datos.fisher_yates();
+				datos.ver(y);
 
-					cout << endl;
-
+				cout << endl;
 
 				getch();
 				break;

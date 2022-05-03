@@ -56,7 +56,7 @@ private:
 		//Get first node of given linked list
 		Nodo<Tipo> *pivot = first;
 		Nodo<Tipo> *front = first;
-		int temp = 0;
+		Tipo temp;
 		while (front != nullptr && front != last)
 		{
 			if (f(front->elemento, last->elemento))
