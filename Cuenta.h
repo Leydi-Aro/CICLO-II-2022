@@ -39,31 +39,29 @@ public:
     //----------------  O   P   E   R   A  C  I   O   N   E   S-----------------
     
     //EXCHANGE VENTA
-    void operacionVenta(float valor) {
+ void operacionVenta(float valor) {
         float cantidad_venta = 0.0;
         float cambio = 0.0;
-        float resultado = 0.0;
         cout << "Ingrese la cantidad a cambiar:" << endl;
         cin >> cantidad_venta;
         cambio = cantidad_venta / valor;
-        resultado = Monto - cantidad_venta;
+        Monto = Monto - cantidad_venta;
         cout << "Has cambiado " << cantidad_venta << " soles a " << fixed << setprecision(2) << cambio << " dolares" << endl;
 		stack.agregar({cambio, cantidad_venta, "USD", "PEN"});
-        cout << "El saldo en tu cuenta actual es de " << resultado << " soles";
+        cout << "El saldo en tu cuenta actual es de " << Monto << " soles";
     }
     //EXCHANGE COMPRA
     void operacionCompra(float valor) {
-        float resultado = 0.0;
         float cambio = 0.0;
         float cantidad_compra = 0.0;
 
         cout << "Ingrese la cantidad a cambiar:" << endl;
         cin >> cantidad_compra;
         cambio = cantidad_compra * valor;
-        resultado = Monto - cantidad_compra;
+        Monto = Monto - cantidad_compra;
         cout << "Has cambiado " << cantidad_compra << " dolares a " << fixed << setprecision(2) << cambio  << " soles" << endl;
 		stack.agregar({cambio, cantidad_compra, "PEN", "USD"});
-        cout << "El saldo en tu cuenta actual es de " << resultado << " dolares";
+        cout << "El saldo en tu cuenta actual es de " << Monto << " dolares";
     }
 
 	void deshacerOperacion() {
