@@ -47,7 +47,7 @@ public:
         cambio = cantidad_venta / valor;
         Monto = Monto - cantidad_venta;
         cout << "Has cambiado " << cantidad_venta << " soles a " << fixed << setprecision(2) << cambio << " dolares" << endl;
-		stack.agregar({cambio, cantidad_venta, "USD", "PEN"});
+		stack.agregar({cambio, cantidad_venta, "USD", "PEN", 1});
         cout << "El saldo en tu cuenta actual es de " << Monto << " soles";
     }
     //EXCHANGE COMPRA
@@ -60,7 +60,7 @@ public:
         cambio = cantidad_compra * valor;
         Monto = Monto - cantidad_compra;
         cout << "Has cambiado " << cantidad_compra << " dolares a " << fixed << setprecision(2) << cambio  << " soles" << endl;
-		stack.agregar({cambio, cantidad_compra, "PEN", "USD"});
+		stack.agregar({cambio, cantidad_compra, "PEN", "USD", 0});
         cout << "El saldo en tu cuenta actual es de " << Monto << " dolares";
     }
 
@@ -68,6 +68,7 @@ public:
 		if (stack.Size()) {
 			Exchange s = stack.popear().undo();
 			cout << "Se le ha devuelto " << s.divisa_compra << " " << setprecision(2) << s.compra << " a su cuenta\n";
+			Monto += s.type ? s.venta : s.compra;
 		} else {
 			cout << "No hay operaciones que deshacer\n";
 		}
