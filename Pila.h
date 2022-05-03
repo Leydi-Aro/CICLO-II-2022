@@ -44,6 +44,7 @@ public:
 		Nodo<T>* aux = top->below;
 		delete top;
 		top = aux;
+		tamanio--;
 		return copy;
     }
 

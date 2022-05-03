@@ -1,11 +1,16 @@
 #pragma once
 #include "Lambda.h"
+#include "Pila.h"
 #include "Vector.h"
+#include <iomanip>
+#include "ExchangeLog.h"
+
+
 class Cuenta {
     string Banco;
     string Moneda;
     float Monto;
-
+	Pila<Exchange> stack;
 public:
     Cuenta(string a, string c = " ", float o=0.0) :Banco(a), Moneda(c), Monto(o) {
         ofstream arch("Archivos/Archivos de Usuarios/" + a + ".txt"); //Cuando se crea un objeto Cuenta, se crea el txt correspondiente
@@ -43,6 +48,7 @@ public:
         cambio = cantidad_venta / valor;
         resultado = Monto - cantidad_venta;
         cout << "Has cambiado " << cantidad_venta << " soles a " << fixed << setprecision(2) << cambio << " dolares" << endl;
+		stack.agregar({cambio, cantidad_venta, "USD", "PEN"});
         cout << "El saldo en tu cuenta actual es de " << resultado << " soles";
     }
     //EXCHANGE COMPRA
@@ -56,11 +62,20 @@ public:
         cambio = cantidad_compra * valor;
         resultado = Monto - cantidad_compra;
         cout << "Has cambiado " << cantidad_compra << " dolares a " << fixed << setprecision(2) << cambio  << " soles" << endl;
+		stack.agregar({cambio, cantidad_compra, "PEN", "USD"});
         cout << "El saldo en tu cuenta actual es de " << resultado << " dolares";
     }
+
+	void deshacerOperacion() {
+		if (stack.Size()) {
+			Exchange s = stack.popear().undo();
+			cout << "Se le ha devuelto " << s.divisa_compra << " " << setprecision(2) << s.compra << " a su cuenta\n";
+		} else {
+			cout << "No hay operaciones que deshacer\n";
+		}
+	}
      
     //------------M   E   N   U       D  E           O   P   E   R   A  C  I   O   N   E   S-----------------
-
     void menu() {
         int opcion;
         bool run = true;
@@ -83,8 +98,9 @@ public:
             cout<<  "1. - Visualizar Cuenta" << endl;
             cout << "2. - EXCHANGE--->  Cambio de soles a dolares (VENTA)" << endl;
             cout << "3. - EXCHANGE--->  Cambio de dolares a soles (COMPRA)" << endl;
+            cout << "4. - EXCHANGE--->  Deshacer operacion" << endl;
 
-            cout << "4. - Regresar" << endl;
+            cout << "5. - Regresar" << endl;
            
             cin >> opcion;
             switch (opcion)
@@ -101,7 +117,11 @@ public:
                 operacionCompra(dolarvalores.pos(1));
                 getch();
                 break;
-            case 4:
+			case 4:
+				deshacerOperacion();
+				getch();
+				break;
+            case 5:
                 run = false;
                 break;
             }
