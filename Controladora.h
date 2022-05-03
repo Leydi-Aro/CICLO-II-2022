@@ -42,7 +42,7 @@ public:
 		{
 			arch << U.getIt()->getname() << "\n";
 			U.iterar();
-		}arch << U.getFin()->getname();
+		} arch << U.getFin()->getname();
 	}
 
 	void SelecUsuario() {

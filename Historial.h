@@ -28,7 +28,4 @@ public:
     bool operator>(const Historial& e)const {
         return this->DNI > e.DNI;
     }
-
-
-
 };
