@@ -1,8 +1,10 @@
 #pragma once
-#pragma once
 #include "Usuarios.h"
 #include "Vector.h"
 #include "Historial.h"
+#include "Register.h"
+#include "Arbol.h"
+
 template <typename Tipo>
 class Controladora {
 	Lista<Tipo*> U;
@@ -67,7 +69,8 @@ public:
 	}
 
 	//-----------------------------------------------------------------------------
-	void menu() {
+	void menu()
+	{
 		bool run = true;
 		short opcion;
 		while (run)
@@ -77,25 +80,31 @@ public:
 			cout << "                       $$ E X C H A N G E $$              " << endl;
 			cout << "                        " << endl;
 			cout << "Nuestros usuarios:" << endl;
-			if (U.It != nullptr) mostrarUsuarios();
-			cout << "1. - Reg"<< char(161) << "strate" << endl;
+			if (U.It != nullptr)
+				mostrarUsuarios();
+			cout << "1. - Reg" << char(161) << "strate" << endl;
 			cout << "2. - Inicia sesi" << char(162) << "n" << endl;
 			cout << "3. - Visualizar Cambio sin cuenta" << endl;
 			cout << "4. - Historial de Usuarios Antiguos" << endl;
 			cout << "5. - Tipo de cambio" << endl;
-			cout << "6. - Salir" << endl;
+			cout << "6. - Ver Arbol de registros" << endl;
+			cout << "7. - Salir" << endl;
 			cin >> opcion;
 
 			switch (opcion)
 			{
-			case 1: {
+			case 1:
+			{
 				CrearUsuario();
-				break; }
-			case 2: {
+				break;
+			}
+			case 2:
+			{
 				SelecUsuario();
 				break;
 			}
-			case 3: {
+			case 3:
+			{
 				Vector<float> dolarvalores;
 				dolarvalores.pushback(3.7180);
 				dolarvalores.pushback(3.7480);
@@ -112,7 +121,8 @@ public:
 				cout << "\n";
 				cin >> opcion;
 
-				switch (opcion) {
+				switch (opcion)
+				{
 				case 1:
 					cout << "Ingrese la cantidad de soles a cambiar: ";
 					cin >> dinero;
@@ -133,7 +143,8 @@ public:
 				getch();
 				break;
 			}
-			case 4: {
+			case 4:
+			{
 				Vector<Historial> datos;
 				datos.pushback(Historial("Claudia", 340000000, "BCP"));
 				datos.pushback(Historial("Pedro", 450000000, "INTERBANK"));
@@ -144,25 +155,27 @@ public:
 				datos.pushback(Historial("Valentin", 670000000, "FINANCIERO"));
 				datos.pushback(Historial("Xiomara", 890000000, "CONTINENTAL"));
 
-				//auto compare= [](Datos i, Datos j)->bool {return i < j; };
-				auto comparar = [](Historial i, Historial j)->bool {return i > j; };
-				auto y = [](Historial c) { cout << c; };
+				// auto compare= [](Datos i, Datos j)->bool {return i < j; };
+				auto comparar = [](Historial i, Historial j) -> bool
+				{ return i > j; };
+				auto y = [](Historial c)
+				{ cout << c; };
 
 				cout << "-----------H I S T O R I A L    D E    U S U A R I O S----------------" << endl;
 				datos.ver(y);
 
 				cout << "----------------ORDENAMINETO BURBUJA-------------------" << endl;
-				//cout << "-----------------Ordena a la derecha--------------------" << endl;
+				// cout << "-----------------Ordena a la derecha--------------------" << endl;
 				datos.OrdenamientoBurbuja(comparar);
 				datos.ver(y);
 
 				cout << "------------------------ORDENAMIENTO INTERCAMBIO----------------" << endl;
-				//cout << "-------------------------Ordena a la izquierda--------------------" << endl;
+				// cout << "-------------------------Ordena a la izquierda--------------------" << endl;
 				datos.OrdenamientoIntercambio(comparar);
 				datos.ver(y);
 
 				cout << "------------------------ORDENAMIENTO ALEATORIO----------------" << endl;
-				//cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
+				// cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
 				datos.fisher_yates();
 				datos.ver(y);
 
@@ -171,7 +184,8 @@ public:
 				getch();
 				break;
 			}
-			case 5:{
+			case 5:
+			{
 				Vector<float> dolarvalores;
 				dolarvalores.pushback(3.7180);
 				dolarvalores.pushback(3.7480);
@@ -183,8 +197,7 @@ public:
 					"             ", " Compra ", " Venta ",
 					"EXCHANGE     ", to_string(dolarvalores.pos(0)), to_string(dolarvalores.pos(1)),
 					"Paralelo     ", " 3.7000 ", " 3.7500 ",
-					"Bancos       ", " 3.6200 ", " 3.8600 "
-				};
+					"Bancos       ", " 3.6200 ", " 3.8600 "};
 
 				for (int i = 0; i < 4; i++)
 				{
@@ -198,15 +211,75 @@ public:
 				getch();
 				break;
 			}
-			case 6: {
+			case 6:
+			{
+
+				Dataset ds;
+				bool run = true;
+				short opcion;
+				while (run)
+				{
+					system("cls");
+					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl
+						 << endl;
+					cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
+					cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;
+					cout << "\n\t\t\t\t\t\t 3. - Mostrar postOrden" << endl;
+					cout << "\n\t\t\t\t\t\t 4. - Cantidad" << endl;
+					cout << "\n\t\t\t\t\t\t 5. - Salir" << endl;
+					cout << "\n\t\t\t\t\t\t Ingrese un numero: ";
+					cin >> opcion;
+
+					switch (opcion)
+					{
+					case 1:
+					{
+						ds.print();
+						_getch();
+						break;
+					}
+					case 2:
+					{
+						ds.printPre();
+						_getch();
+						break;
+					}
+					case 3:
+					{
+						ds.printPost();
+						_getch();
+						break;
+					}
+					case 4:
+					{
+						cout << "\n\n"
+							 << ds.size();
+						_getch();
+						break;
+					}
+					case 5:
+					{
+						run = false;
+						break;
+					}
+					}
+				}
+
+				getch();
+				break;
+			}
+			case 7:
+			{
 				GuardarUsuarios();
 				U.resetit();
 				while (U.It->siguiente != nullptr)
 				{
-					if (U.It == nullptr) break;
+					if (U.It == nullptr)
+						break;
 					U.getIt()->GuardarArchivos();
 					U.iterar();
-				}U.getFin()->GuardarArchivos();
+				}
+				U.getFin()->GuardarArchivos();
 				run = false;
 				break;
 			}
