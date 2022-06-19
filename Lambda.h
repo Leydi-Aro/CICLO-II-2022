@@ -1,27 +1,11 @@
 #pragma once
 #include <cstdlib>
+#include <conio.h>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <functional>
 #include <sstream>
-
-// En caso estemos en visual studio incluira conio.h
-// Sino incluira conio.hpp
-#if _MSC_VER && !__INTEL_COMPILER
-	#include <conio.h>
-#else
-	#include "conio.hpp"
-#endif
-
-// Si estamos en windows, CLEAR sera 'cls'
-// Sino, CLEAR sera 'clear
-#if defined(WIN32)
-	#define CLEAR "cls"
-#else
-	#define CLEAR "clear"
-#endif
-
 #include <iomanip>
 #include <vector>
 using namespace std;

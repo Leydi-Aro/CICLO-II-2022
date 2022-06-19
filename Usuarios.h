@@ -64,7 +64,7 @@ public:
         bool run = true;
         while (run)
         {
-            system(CLEAR);
+            system("cls");
             cout << "Bienvenido a E X C H A N G E " << nombre << "\nA�ada una cuenta bancaria para continuar :D  \n: " << endl;
             if (arch.It != nullptr) mostrarArchivos();
             cout << "1. - Agregar Cuenta" << endl;
