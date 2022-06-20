@@ -6,23 +6,29 @@
 #include "Arbol.h"
 
 template <typename Tipo>
-class Controladora {
-	Lista<Tipo*> U;
+class Controladora
+{
+	Lista<Tipo *> U;
+
 public:
 	Controladora() {}
 	~Controladora() {}
-	
+
 	//-------------- CONTROLADORA          U  S  U  A  R  I  O-------------------
 
-	void CrearUsuario(string a = "") {
-		if (a != "") U.insertar(new Tipo(a));
-		else {
+	void CrearUsuario(string a = "")
+	{
+		if (a != "")
+			U.insertar(new Tipo(a));
+		else
+		{
 			string uname;
 			uname = l1("Ingrese nombre del nuevo usuario");
 			U.insertar(new Tipo(uname));
 		}
 	}
-	void CargarUsuarios() {
+	void CargarUsuarios()
+	{
 		string linea;
 		ifstream arch("Archivos/Usuarios/Usuarios.txt");
 		while (getline(arch, linea))
@@ -32,33 +38,46 @@ public:
 		U.resetit();
 		while (U.It->siguiente != nullptr)
 		{
-			if (U.It == nullptr) break;
+			if (U.It == nullptr)
+				break;
 			U.getIt()->CargarArchivos();
 			U.iterar();
-		}U.getFin()->CargarArchivos();
+		}
+		U.getFin()->CargarArchivos();
 	}
-	void GuardarUsuarios() {
+	void GuardarUsuarios()
+	{
 		U.resetit();
 		ofstream arch("Archivos/Usuarios/Usuarios.txt");
 		while (U.It->siguiente != nullptr)
 		{
 			arch << U.getIt()->getname() << "\n";
 			U.iterar();
-		} arch << U.getFin()->getname();
+		}
+		arch << U.getFin()->getname();
 	}
 
-	void SelecUsuario() {
+	void SelecUsuario()
+	{
 		U.resetit();
 		string temp = l1("\nIngresar nombre del usuario a seleccionar : ");
 		while (U.It->siguiente != nullptr)
 		{
-			if (U.getIt()->getname() == temp) { U.getIt()->menuUser(); break; }
+			if (U.getIt()->getname() == temp)
+			{
+				U.getIt()->menuUser();
+				break;
+			}
 			U.iterar();
-		} if (U.getFin()->getname() == temp) U.getFin()->menuUser();
+		}
+		if (U.getFin()->getname() == temp)
+			U.getFin()->menuUser();
 	}
-	void mostrarUsuarios() {  
+	void mostrarUsuarios()
+	{
 		// Ordenar por orden alfabetico usando quicksort
-		U.quick_sort([](Usuario* a, Usuario* b) { return a->getname() < b->getname(); });
+		U.quick_sort([](Usuario *a, Usuario *b)
+					 { return a->getname() < b->getname(); });
 		U.resetit();
 		while (U.It->siguiente != nullptr)
 		{
@@ -68,6 +87,37 @@ public:
 		cout << "\t" << U.getIt()->getname() << endl;
 	}
 
+	string fhash(string name, string monto)
+	{
+		string cadena;
+		cadena = name += monto;
+
+		stringstream ss;
+		int i = 0;
+		ss << std::hex;
+		for (size_t i = 0; i < 8; i++)
+		{
+			ss << rand() % 16;
+		}
+		for (size_t i = 0; i < cadena.length(); i++)
+		{
+			ss << cadena[i] % 16;
+		}
+		for (size_t i = 0; i < 8; i++)
+		{
+			ss << rand() % 16;
+		}
+
+		string temp;
+		for (size_t i = 0; i < 20; i++)
+		{
+			if (ss.str()[i] != 0)
+				temp += ss.str()[i];
+			else
+				temp += to_string(rand() % 10);
+		}
+		return temp;
+	}
 	//-----------------------------------------------------------------------------
 	void menu()
 	{
@@ -88,7 +138,8 @@ public:
 			cout << "4. - Historial de Usuarios Antiguos" << endl;
 			cout << "5. - Tipo de cambio" << endl;
 			cout << "6. - Ver Arbol de registros" << endl;
-			cout << "7. - Salir" << endl;
+			cout << "7. - Avanze HashTable (HashFunction)" << endl;
+			cout << "8. - Salir" << endl;
 			cin >> opcion;
 
 			switch (opcion)
@@ -270,6 +321,22 @@ public:
 			}
 			case 7:
 			{
+				string nombre, saldo;
+
+				cout << "        HASH        " << endl;
+				cout << "Escriba su nombre: ";
+				getline(cin, nombre);
+
+				cout << "Escriba su cantidad de dinero: ";
+				getline(cin, saldo);
+
+				// funcionhash(nombre, saldo);
+
+				cout << "\nEl c" << char(162) << "digo hash es el siguiente :" << endl;
+				cout << fhash(nombre, saldo);
+			}
+			case 8:
+			{
 				GuardarUsuarios();
 				U.resetit();
 				while (U.It->siguiente != nullptr)
@@ -286,5 +353,4 @@ public:
 			}
 		}
 	}
-
 };
