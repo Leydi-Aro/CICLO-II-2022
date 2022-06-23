@@ -94,7 +94,7 @@ public:
 	short opcion;
 	while (run)
 	{
-		system("cls");
+		system("clear");
 		cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl << endl;
 		cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
 		cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;

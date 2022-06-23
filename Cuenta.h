@@ -23,7 +23,7 @@ public:
 
     // ----Abrir archivo de cuenta ----
     void abrirArch() {
-        system("cls");
+        system("clear");
         cout << "Imprimiendo datos de la Cuenta " << Banco << ".txt" << endl;
         cout << "Tipo de Moneda: " << Moneda << endl;//cout << "Comentario: " << Moneda << endl;
         cout << "Monto disponible en la cuenta: " << Monto << endl;
@@ -80,7 +80,7 @@ public:
         bool run = true;
         while (run)
         {
-            system("cls");
+            system("clear");
 
             Vector<float> dolarvalores;
             dolarvalores.pushback(3.7180);

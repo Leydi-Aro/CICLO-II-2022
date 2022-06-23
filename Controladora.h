@@ -125,7 +125,7 @@ public:
 		short opcion;
 		while (run)
 		{
-			system("cls");
+			system("clear");
 			cout << " ||||||||||||||||||| B I E N V E N I D O S   A |||||||||||||" << endl;
 			cout << "                       $$ E X C H A N G E $$              " << endl;
 			cout << "                        " << endl;
@@ -270,7 +270,7 @@ public:
 				short opcion;
 				while (run)
 				{
-					system("cls");
+					system("clear");
 					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl
 						 << endl;
 					cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
@@ -286,26 +286,26 @@ public:
 					case 1:
 					{
 						ds.print();
-						_getch();
+						getch();
 						break;
 					}
 					case 2:
 					{
 						ds.printPre();
-						_getch();
+						getch();
 						break;
 					}
 					case 3:
 					{
 						ds.printPost();
-						_getch();
+						getch();
 						break;
 					}
 					case 4:
 					{
 						cout << "\n\n"
 							 << ds.size();
-						_getch();
+						getch();
 						break;
 					}
 					case 5:

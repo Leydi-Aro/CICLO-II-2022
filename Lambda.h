@@ -1,6 +1,12 @@
 #pragma once
 #include <cstdlib>
-#include <conio.h>
+
+#ifdef _WIN32
+	#include <conio.h>
+#endif
+
+#include "conio.hpp"
+
 #include <fstream>
 #include <iostream>
 #include <string>
