@@ -3,9 +3,11 @@
 
 #ifdef _WIN32
 	#include <conio.h>
+	#define CLEAR "cls"
+#else
+	#include "conio.hpp"
+	#define CLEAR "clear"
 #endif
-
-#include "conio.hpp"
 
 #include <fstream>
 #include <iostream>

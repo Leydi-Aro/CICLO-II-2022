@@ -130,7 +130,7 @@ public:
 				});
 		while (run)
 		{
-			system("clear");
+			system(CLEAR);
 			cout << " ||||||||||||||||||| B I E N V E N I D O S   A |||||||||||||" << endl;
 			cout << "                       $$ E X C H A N G E $$              " << endl;
 			cout << "                        " << endl;
@@ -283,7 +283,7 @@ public:
 				while (run)
 				{
 
-					system("clear");
+					system(CLEAR);
 					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl
 
 						 << endl;
