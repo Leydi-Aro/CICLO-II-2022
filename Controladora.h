@@ -278,9 +278,6 @@ public:
 			case 6:
 			{
 
-
-				Dataset ds;
-
 				bool run = true;
 				short opcion;
 				while (run)

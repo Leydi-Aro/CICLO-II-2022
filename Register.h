@@ -6,17 +6,20 @@
 #include <math.h>
 
 class Register {
-	int anios;
-	string nombre;
+	long anios;
+	string trabajo;
 	string estado;
 	string contacto;
 	string mes;
-	int dia;
-	string operacion;
-	int problemas;
+	string dia;
+	long cambios;
+	long problemas;
 	float cantidad;
+	string nombre;
+	string operacion;
 public:
-	Register(int anios = 54, string nombre = "", string estado = "", string contacto = "", string mes = "", 
+	// small dataset w ptr
+	Register(void* dummy, int anios = 54, string nombre = "", string estado = "", string contacto = "", string mes = "", 
 		int dia = 11, string operacion = "", int problemas = 3, float cantidad = 5228.1) {
 		this->anios = anios;
 		this->nombre = nombre;
@@ -25,6 +28,19 @@ public:
 		this->mes = mes;
 		this->dia = dia;
 		this->operacion = operacion;
+		this->problemas = problemas;
+		this->cantidad = cantidad;
+	}
+	// big dataset no ptr
+	Register(long anios = 54, string trabajo = "", string estado = "", string contacto = "", string mes = "", 
+		string dia = "", long cambios = 540, long problemas = 3, float cantidad = 5228.1) {
+		this->anios = anios;
+		this->trabajo = trabajo;
+		this->estado = estado;
+		this->contacto = contacto;
+		this->mes = mes;
+		this->dia = dia;
+		this->cambios = cambios;
 		this->problemas = problemas;
 		this->cantidad = cantidad;
 	}
@@ -68,8 +84,13 @@ class Dataset {
 public:
 	Dataset(function<int(Register)> hash_function) {
 		hashtable.set_hash_funcion(hash_function);
+		readTSV2("Archivos/Dataset/data5k.csv");
 		readTSV("Archivos/Dataset/data.csv");
 	}
+	Dataset() {
+		readTSV("Archivos/Dataset/data.csv");
+	}
+	// smallds
 	void readTSV(string name = "", bool header = true) {//campos separados por tab o espacios
 		ifstream file(name);
 		string reg, t_anios, nombre, estado, contacto, mes, t_dia, operacion, t_problemas, t_cantidad;
@@ -79,17 +100,36 @@ public:
 		float cantidad;
 		if (header)
 			getline(file, reg);
+		void* dummy;
 		while (file >> t_anios >> nombre >> estado>> contacto>>mes>>t_dia>> operacion>> t_problemas>> t_cantidad) {
 			anios = stoi(t_anios);
 			dia = stoi(t_dia);
 			problemas = stoi(t_problemas);
 			cantidad = stof(t_cantidad);
+			
+			
 
+			registros.insertar(Register(dummy, anios, nombre, estado, contacto, mes, dia, operacion, problemas, cantidad));
+		}
+	}
+	void readTSV2(string name = "", bool header = true) {//campos separados por tab o espacios
+		ifstream file(name);
+		string reg, t_anios, trabajo, estado, contacto, mes, dia, t_cambios, t_problemas, t_cantidad;
+		long anios;
+		long cambios;
+		long problemas;
+		float cantidad;
+		if (header)
+			getline(file, reg);
+		while (file >> t_anios >> trabajo >> estado>> contacto>>mes>>dia>> t_cambios>> t_problemas>> t_cantidad) {
+			anios = stoi(t_anios);
+			cambios = stoi(t_cambios);
+			problemas = stoi(t_problemas);
+			cantidad = stof(t_cantidad);
 
 			Register r(anios, trabajo, estado, contacto, mes, dia, cambios, problemas, cantidad);
 			registros.insertar(r);
 			hashtable.add(r);
-
 		}
 	}
 	void display_ht(){
@@ -115,8 +155,10 @@ public:
 	}
 
 
+	//small ds
 	void writeTSV() {
 		string t_anios, nombre, estado, contacto, mes, t_dia, operacion, t_problemas, t_cantidad;
+		void* dummy;
 
 
 		//------
@@ -174,7 +216,7 @@ public:
 		problemas = stoi(t_problemas);
 		cantidad = stof(t_cantidad);
 
-		registros.insertar(Register(anios, nombre, estado, contacto, mes, dia, operacion, problemas, cantidad));
+		registros.insertar(Register(dummy, anios, nombre, estado, contacto, mes, dia, operacion, problemas, cantidad));
 
 
 
