@@ -138,7 +138,7 @@ public:
 			cout << "4. - Historial de Usuarios Antiguos" << endl;
 			cout << "5. - Tipo de cambio" << endl;
 			cout << "6. - Enviar o ver reportes de error" << endl;
-			cout << "7. - Avanze HashTable (HashFunction)" << endl;
+			cout << "7. - Mostrar HashTable" << endl;
 			cout << "8. - Salir" << endl;
 			cin >> opcion;
 
@@ -232,6 +232,11 @@ public:
 
 				cout << endl;
 
+				cout << "------------------------ORDENAMIENTO MERGESORT----------------" << endl;
+				// cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
+				datos.MergeSort(comparar);
+				datos.ver(y);
+				
 				getch();
 				break;
 			}

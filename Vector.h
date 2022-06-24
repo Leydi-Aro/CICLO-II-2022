@@ -46,8 +46,9 @@ public:
         *b = aux;
     }
 
-    //aceder a valor por posicion
-    T pos(int pos){
+    // aceder a valor por posicion
+    T pos(int pos)
+    {
         return arr[pos];
     }
 
@@ -59,54 +60,106 @@ public:
         }
     }*/
 
-    void ver(function<void(T)>c) {
-        for (size_t i = 0; i < size; ++i) {
+    void ver(function<void(T)> c)
+    {
+        for (size_t i = 0; i < size; ++i)
+        {
             c(arr[i]);
         }
     }
 
-    void fisher_yates(){
-        for(int i = size-1; i>0; i--){
-            int j = (rand()% (i +1));
-            swap(&arr[j],&arr[i]);
+    void fisher_yates()
+    {
+        for (int i = size - 1; i > 0; i--)
+        {
+            int j = (rand() % (i + 1));
+            swap(&arr[j], &arr[i]);
         }
     }
 
-    void OrdenamientoBurbuja(function<bool(T, T)>c) {
-        for (size_t i = 0; i < size - 1; ++i) {
-            for (size_t j = 0; j < size - 1 - i; ++j) {
+    void OrdenamientoBurbuja(function<bool(T, T)> c)
+    {
+        for (size_t i = 0; i < size - 1; ++i)
+        {
+            for (size_t j = 0; j < size - 1 - i; ++j)
+            {
                 if (c(arr[j], arr[j + 1]))
                     swap(&arr[j], &arr[j + 1]);
-
             }
         }
     }
 
-    void OrdenamientoIntercambio(function<bool(T, T)>c) {
-        for (size_t i = 0; i < size - 1; i++) {
-            for (size_t j = i + 1; j < size; j++) {
-                if (c(arr[i], arr[j])) {
+    void OrdenamientoIntercambio(function<bool(T, T)> c)
+    {
+        for (size_t i = 0; i < size - 1; i++)
+        {
+            for (size_t j = i + 1; j < size; j++)
+            {
+                if (c(arr[i], arr[j]))
+                {
                     swap(&arr[i], &arr[j]);
                 }
             }
         }
     }
 
-    void OrdenamientoMergesort(function<bool(T,T)>C){
-        if(size>1){
-            int mitad = size/2;
-            Vector<T> izq(mitad);
-            Vector<T> der(size-mitad);
-            for(int i = 0; i<mitad; i++){
-                izq.pushback(arr[i]);
+    void Merge(function<bool(T, T)> c)
+    {
+        T *aux = new T[size];
+        int i = 0;
+        int j = size / 2;
+        int k = 0;
+        while (i < size / 2 && j < size)
+        {
+            if (c(arr[i], arr[j]))
+            {
+                aux[k] = arr[i];
+                i++;
             }
-            for(int i = mitad; i<size; i++){
-                der.pushback(arr[i]);
+            else
+            {
+                aux[k] = arr[j];
+                j++;
             }
-            izq.OrdenamientoMergesort(C);
-            der.OrdenamientoMergesort(C);
-            OrdenamientoMerge(izq,der,C);
+            k++;
         }
-        swap(&arr[0],&arr[size-1]);
+        while (i < size / 2)
+        {
+            aux[k] = arr[i];
+            i++;
+            k++;
+        }
+        while (j < size)
+        {
+            aux[k] = arr[j];
+            j++;
+            k++;
+        }
+        for (size_t i = 0; i < size; i++)
+        {
+            arr[i] = aux[i];
+        }
+        delete aux;
+    }
+
+    void MergeSort(function<bool(T, T)> c)
+    {
+        if (size > 1)
+        {
+            Vector<T> *a = new Vector<T>();
+            Vector<T> *b = new Vector<T>();
+            for (size_t i = 0; i < size; i++)
+            {
+                if (i < size / 2)
+                    a->pushback(arr[i]);
+                else
+                    b->pushback(arr[i]);
+            }
+            a->MergeSort(c);
+            b->MergeSort(c);
+            Merge(c);
+            delete a;
+            delete b;
+        }
     }
 };
