@@ -17,7 +17,7 @@ public:
 		izq = der = nullptr;
 
 	}
-	Nodo() {  }
+	//Nodo() {  }
 };
 
 template <class T>

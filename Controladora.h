@@ -137,7 +137,7 @@ public:
 			cout << "3. - Visualizar Cambio sin cuenta" << endl;
 			cout << "4. - Historial de Usuarios Antiguos" << endl;
 			cout << "5. - Tipo de cambio" << endl;
-			cout << "6. - Ver Arbol de registros" << endl;
+			cout << "6. - Enviar o ver reportes de error" << endl;
 			cout << "7. - Avanze HashTable (HashFunction)" << endl;
 			cout << "8. - Salir" << endl;
 			cin >> opcion;
