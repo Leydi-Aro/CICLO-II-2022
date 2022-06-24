@@ -146,6 +146,7 @@ public:
 			cout << "7. - Ver registros en hash table" << endl;
 			cout << "8. - Avanze HashTable (HashFunction)" << endl;
 			cout << "9. - Salir" << endl;
+
 			cin >> opcion;
 
 			switch (opcion)
@@ -238,6 +239,11 @@ public:
 
 				cout << endl;
 
+				cout << "------------------------ORDENAMIENTO MERGESORT----------------" << endl;
+				// cout << "-------------------------Ordenamiento Fisher-Yates shuffle--------------------" << endl;
+				datos.MergeSort(comparar);
+				datos.ver(y);
+				
 				getch();
 				break;
 			}
@@ -270,19 +276,18 @@ public:
 			}
 			case 6:
 			{
-
 				bool run = true;
 				short opcion;
 				while (run)
 				{
-					system("clear");
-					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl
-						 << endl;
+					system("cls");
+					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDO INGRESA TU REPORTE ||" << endl << endl;
 					cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
 					cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;
 					cout << "\n\t\t\t\t\t\t 3. - Mostrar postOrden" << endl;
-					cout << "\n\t\t\t\t\t\t 4. - Cantidad" << endl;
-					cout << "\n\t\t\t\t\t\t 5. - Salir" << endl;
+					cout << "\n\t\t\t\t\t\t 4. - Ingresar Reporte" << endl;
+					cout << "\n\t\t\t\t\t\t 5. - Cantidad" << endl;
+					cout << "\n\t\t\t\t\t\t 6. - Salir" << endl;
 					cout << "\n\t\t\t\t\t\t Ingrese un numero: ";
 					cin >> opcion;
 
@@ -308,12 +313,17 @@ public:
 					}
 					case 4:
 					{
+						ds.writeTSV();
+						break;
+					}
+					case 5:
+					{
 						cout << "\n\n"
 							 << ds.size();
 						getch();
 						break;
 					}
-					case 5:
+					case 6:
 					{
 						run = false;
 						break;

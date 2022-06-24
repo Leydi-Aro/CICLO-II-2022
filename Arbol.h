@@ -18,7 +18,7 @@ public:
 
 	}
 	Nodo2() {  }
-};
+
 
 template <class T>
 class ArbolB {

@@ -1,29 +1,30 @@
 #pragma once
 #include "Arbol.h"
+
 #include "HashTable.hpp"
 #include <functional>
 #include <math.h>
 
 class Register {
-	long anios;
-	string trabajo;
+	int anios;
+	string nombre;
 	string estado;
 	string contacto;
 	string mes;
-	string dia;
-	long cambios;
-	long problemas;
+	int dia;
+	string operacion;
+	int problemas;
 	float cantidad;
 public:
-	Register(long anios = 54, string trabajo = "", string estado = "", string contacto = "", string mes = "", 
-		string dia = "", long cambios = 540, long problemas = 3, float cantidad = 5228.1) {
+	Register(int anios = 54, string nombre = "", string estado = "", string contacto = "", string mes = "", 
+		int dia = 11, string operacion = "", int problemas = 3, float cantidad = 5228.1) {
 		this->anios = anios;
-		this->trabajo = trabajo;
+		this->nombre = nombre;
 		this->estado = estado;
 		this->contacto = contacto;
 		this->mes = mes;
 		this->dia = dia;
-		this->cambios = cambios;
+		this->operacion = operacion;
 		this->problemas = problemas;
 		this->cantidad = cantidad;
 	}
@@ -45,7 +46,7 @@ public:
 		return code;
 	}
 	friend ostream& operator<<(ostream& os, const Register& r) {
-		os << r.anios << " " << r.trabajo << " " << r.estado << " " << r.contacto << " " << r.mes << " " << r.dia << " " << r.cambios << " " << r.problemas << " " << r.cantidad<< endl;
+		os << r.anios << " " << r.nombre << " " << r.estado << " " << r.contacto << " " << r.mes << " " << r.dia << " " << r.operacion << " " << r.problemas << " " << r.cantidad<< endl;
 		return os;
 	}
 	bool operator<(const Register& r) {
@@ -71,16 +72,16 @@ public:
 	}
 	void readTSV(string name = "", bool header = true) {//campos separados por tab o espacios
 		ifstream file(name);
-		string reg, t_anios, trabajo, estado, contacto, mes, dia, t_cambios, t_problemas, t_cantidad;
-		long anios;
-		long cambios;
-		long problemas;
+		string reg, t_anios, nombre, estado, contacto, mes, t_dia, operacion, t_problemas, t_cantidad;
+		int anios;
+		int dia;
+		int problemas;
 		float cantidad;
 		if (header)
 			getline(file, reg);
-		while (file >> t_anios >> trabajo >> estado>> contacto>>mes>>dia>> t_cambios>> t_problemas>> t_cantidad) {
+		while (file >> t_anios >> nombre >> estado>> contacto>>mes>>t_dia>> operacion>> t_problemas>> t_cantidad) {
 			anios = stoi(t_anios);
-			cambios = stoi(t_cambios);
+			dia = stoi(t_dia);
 			problemas = stoi(t_problemas);
 			cantidad = stof(t_cantidad);
 
@@ -112,50 +113,3 @@ public:
 	}
 };
 
-/*int main() {
-
-	Dataset ds;
-
-	bool run = true;
-	short opcion;
-	while (run)
-	{
-		system("clear");
-		cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl << endl;
-		cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 3. - Mostrar postOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 4. - Cantidad" << endl;
-		cout << "\n\t\t\t\t\t\t 5. - Salir" << endl;
-		cout << "\n\t\t\t\t\t\t Ingrese un numero: ";
-		cin >> opcion;
-
-		switch (opcion) {
-		case 1: {
-			ds.print();
-			_getch();
-			break; }
-		case 2: {
-			ds.printPre();
-			_getch();
-			break; }
-		case 3: {
-			ds.printPost();
-			_getch();
-			break; }
-		case 4: {
-			cout << "\n\n" << ds.size();
-			_getch();
-			break; }
-		case 5: {
-			run = false;
-			break;
-		}
-
-		}
-
-	}
-
-	_getch();
-	return 0;
-}*/
