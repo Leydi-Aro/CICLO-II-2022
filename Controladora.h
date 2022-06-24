@@ -142,11 +142,9 @@ public:
 			cout << "3. - Visualizar Cambio sin cuenta" << endl;
 			cout << "4. - Historial de Usuarios Antiguos" << endl;
 			cout << "5. - Tipo de cambio" << endl;
-
 			cout << "6. - Ver Arbol de registros" << endl;
 			cout << "7. - Ver registros en hash table" << endl;
-			cout << "8. - Avanze HashTable (HashFunction)" << endl;
-			cout << "9. - Salir" << endl;
+			cout << "8. - Salir" << endl;
 
 			cin >> opcion;
 
@@ -347,22 +345,6 @@ public:
 
 			}
 			case 8:
-			{
-				string nombre, saldo;
-
-				cout << "        HASH        " << endl;
-				cout << "Escriba su nombre: ";
-				getline(cin, nombre);
-
-				cout << "Escriba su cantidad de dinero: ";
-				getline(cin, saldo);
-
-				// funcionhash(nombre, saldo);
-
-				cout << "\nEl c" << char(162) << "digo hash es el siguiente :" << endl;
-				cout << fhash(nombre, saldo);
-			}
-			case 9:
 			{
 				GuardarUsuarios();
 				U.resetit();
