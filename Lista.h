@@ -14,10 +14,12 @@ template <typename Tipo>
 class Lista {
     Nodo<Tipo>* inicio;
     Nodo<Tipo>* fin;
+	int len = 0;
 public:
     Lista() {
         It = fin = inicio = nullptr;
     }
+	int size() {return len;}
     Nodo<Tipo>* It;              
     void insertar(Tipo e) {      
         Nodo<Tipo>* n = new Nodo<Tipo>(e);
@@ -27,17 +29,39 @@ public:
             fin->siguiente = n;
             fin = n;
         }
+		len++;
     }
+	void ejecutar(function<void(Tipo)> func) {
+        Nodo<Tipo>* aux = inicio;
+        while (aux->siguiente != nullptr) {
+			func(aux->elemento);
+            aux = aux->siguiente;
+        }
+		func(aux->elemento);
+	}
     void mostrar(const function<void(Tipo)>& criterio = [](Tipo e){ 
 															std::cout << e << "\n"; 
 														} ) {
-
         Nodo<Tipo>* aux = inicio;
         while (aux->siguiente != nullptr) {
-            cout << aux->elemento << " ";
+            criterio(aux->elemento); cout << " ";
             aux = aux->siguiente;
         }
-        cout << aux->elemento << " ";
+        criterio(aux->elemento); cout << " ";
+    }          
+
+    void mostrar_short(const function<void(Tipo)>& criterio) {
+		// 2 primeros y 2 ultimos
+        Nodo<Tipo>* aux = inicio;
+        for (int i = 0; i < len && aux; i++) {
+			if (i < 2 || i >= len-3) {
+				criterio(aux->elemento); cout << " ";
+			}
+			else if (i == 2) {
+				cout << "...";
+			}
+            aux = aux->siguiente;
+        }
     }          
 
     void iterar() { if (It->siguiente != nullptr) It = It->siguiente; else It = inicio; }
@@ -48,8 +72,6 @@ public:
 	void quick_sort(const function<bool(Tipo, Tipo)>& f = [](Tipo a, Tipo b){ return a > b; }) {
 		_quick_sort(inicio, fin, f);
 	}
-
-
 private:
 	Nodo<Tipo>* parition(Nodo<Tipo> *first, Nodo<Tipo> *last, const function<bool(Tipo, Tipo)>& f)
 	{
