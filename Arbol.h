@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <conio.h>
+#include "Lambda.h"
 #include <string>
 #include <functional>
 #include <fstream>
@@ -17,7 +17,9 @@ public:
 		izq = der = nullptr;
 
 	}
-	//Nodo() {  }
+
+	Nodo2() {  }
+
 };
 
 template <class T>
