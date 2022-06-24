@@ -51,7 +51,7 @@ public:
     }          
 
     void mostrar_short(const function<void(Tipo)>& criterio) {
-		// 2 primeros y 2 ultimos
+		// 2 primeros y 3 ultimos
         Nodo<Tipo>* aux = inicio;
         for (int i = 0; i < len && aux; i++) {
 			if (i < 2 || i >= len-3) {

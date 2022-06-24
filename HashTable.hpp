@@ -8,6 +8,7 @@ using namespace std;
  * es potencialmente O(log(n)) aproximadamente ya que depende
  * de la funcion hash. 
  */
+
 template<typename T>
 class HashTable {
 	Lista<T>* data;
@@ -36,11 +37,22 @@ public:
 		return len;
 	}
 	// O(n)
-	void display(function<void(T)> f) {
+	void display_short(function<void(T)> f) {
 		int total = 0;
 		for(int i = 0; i < size; i++) {
 			cout << "[" << i+1 << "] : {";
 			data[i].mostrar_short(f);
+			cout << "} Total: " << data[i].size() << "\n";
+			total += data[i].size();
+		}
+		cout << "\nSe distribuyeron " << total << " datos en " << size << " listas\n";
+	}
+	// O(n)
+	void display(function<void(T)> f) {
+		int total = 0;
+		for(int i = 0; i < size; i++) {
+			cout << "[" << i+1 << "] : {";
+			data[i].mostrar(f);
 			cout << "} Total: " << data[i].size() << "\n";
 			total += data[i].size();
 		}

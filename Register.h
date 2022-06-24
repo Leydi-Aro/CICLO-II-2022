@@ -30,9 +30,9 @@ public:
 	string get_trabajo() {
 		return trabajo;
 	}
-	// funcion hash
+
 	int hash_this() {
-		int code = 1e8;
+		int code = 1e8; // 1122322 % 5
 		code += int(cantidad) % 10 * pow(10, 0);
 		code += int(anios) % 10 * pow(10, 1);
 		code += int(cambios) % 10 * pow(10, 2);
@@ -91,7 +91,7 @@ public:
 	}
 	void display_ht(){
 		cout << "Registros: " << hashtable.Size() << "\n";
-		hashtable.display([](Register r){
+		hashtable.display_short([](Register r){
 			cout << r.get_trabajo(); 	});
 
 	}
