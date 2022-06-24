@@ -1,29 +1,30 @@
 #pragma once
 #include "Arbol.h"
+
 #include "HashTable.hpp"
 #include <functional>
 #include <math.h>
 
 class Register {
-	long anios;
-	string trabajo;
+	int anios;
+	string nombre;
 	string estado;
 	string contacto;
 	string mes;
-	string dia;
-	long cambios;
-	long problemas;
+	int dia;
+	string operacion;
+	int problemas;
 	float cantidad;
 public:
-	Register(long anios = 54, string trabajo = "", string estado = "", string contacto = "", string mes = "", 
-		string dia = "", long cambios = 540, long problemas = 3, float cantidad = 5228.1) {
+	Register(int anios = 54, string nombre = "", string estado = "", string contacto = "", string mes = "", 
+		int dia = 11, string operacion = "", int problemas = 3, float cantidad = 5228.1) {
 		this->anios = anios;
-		this->trabajo = trabajo;
+		this->nombre = nombre;
 		this->estado = estado;
 		this->contacto = contacto;
 		this->mes = mes;
 		this->dia = dia;
-		this->cambios = cambios;
+		this->operacion = operacion;
 		this->problemas = problemas;
 		this->cantidad = cantidad;
 	}
@@ -45,7 +46,7 @@ public:
 		return code;
 	}
 	friend ostream& operator<<(ostream& os, const Register& r) {
-		os << r.anios << " " << r.trabajo << " " << r.estado << " " << r.contacto << " " << r.mes << " " << r.dia << " " << r.cambios << " " << r.problemas << " " << r.cantidad<< endl;
+		os << r.anios << " " << r.nombre << " " << r.estado << " " << r.contacto << " " << r.mes << " " << r.dia << " " << r.operacion << " " << r.problemas << " " << r.cantidad<< endl;
 		return os;
 	}
 	bool operator<(const Register& r) {
@@ -71,22 +72,24 @@ public:
 	}
 	void readTSV(string name = "", bool header = true) {//campos separados por tab o espacios
 		ifstream file(name);
-		string reg, t_anios, trabajo, estado, contacto, mes, dia, t_cambios, t_problemas, t_cantidad;
-		long anios;
-		long cambios;
-		long problemas;
+		string reg, t_anios, nombre, estado, contacto, mes, t_dia, operacion, t_problemas, t_cantidad;
+		int anios;
+		int dia;
+		int problemas;
 		float cantidad;
 		if (header)
 			getline(file, reg);
-		while (file >> t_anios >> trabajo >> estado>> contacto>>mes>>dia>> t_cambios>> t_problemas>> t_cantidad) {
+		while (file >> t_anios >> nombre >> estado>> contacto>>mes>>t_dia>> operacion>> t_problemas>> t_cantidad) {
 			anios = stoi(t_anios);
-			cambios = stoi(t_cambios);
+			dia = stoi(t_dia);
 			problemas = stoi(t_problemas);
 			cantidad = stof(t_cantidad);
+
 
 			Register r(anios, trabajo, estado, contacto, mes, dia, cambios, problemas, cantidad);
 			registros.insertar(r);
 			hashtable.add(r);
+
 		}
 	}
 	void display_ht(){
@@ -110,52 +113,77 @@ public:
 		return registros.cantidad();
 
 	}
-};
 
-/*int main() {
 
-	Dataset ds;
+	void writeTSV() {
+		string t_anios, nombre, estado, contacto, mes, t_dia, operacion, t_problemas, t_cantidad;
 
-	bool run = true;
-	short opcion;
-	while (run)
-	{
-		system("clear");
-		cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl << endl;
-		cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 3. - Mostrar postOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 4. - Cantidad" << endl;
-		cout << "\n\t\t\t\t\t\t 5. - Salir" << endl;
-		cout << "\n\t\t\t\t\t\t Ingrese un numero: ";
-		cin >> opcion;
 
-		switch (opcion) {
-		case 1: {
-			ds.print();
-			_getch();
-			break; }
-		case 2: {
-			ds.printPre();
-			_getch();
-			break; }
-		case 3: {
-			ds.printPost();
-			_getch();
-			break; }
-		case 4: {
-			cout << "\n\n" << ds.size();
-			_getch();
-			break; }
-		case 5: {
-			run = false;
-			break;
-		}
+		//------
+		int anios;
+		int dia;
+		int problemas;
+		float cantidad;
+		//-------
 
-		}
+		ofstream file;
+		file.open("data.csv", ios::app);
 
+		cout << endl;
+		cout << "----COMPLETE SUS DATOS PARA PODER REPORTAR EL PROBLEMA----: " << endl;
+		getline(cin, t_anios);
+		cout << "Ingrese su EDAD: " << endl;
+		getline(cin, t_anios);
+		file << t_anios;
+		cout << "Ingrese su NOMBRE: " << endl;
+		getline(cin, nombre);
+		file << "\t";
+		file << nombre;
+		cout << "Ingrese el ESTADO de prioridad del problema (baja, media, alta, urgente): " << endl;
+		getline(cin, estado);
+		file << "\t";
+		file << estado;
+		cout << "Ingrese su CONTACTO (ejemplo: gmail ): " << endl;
+		getline(cin, contacto);
+		file << "\t";
+		file << contacto;
+		cout << "Ingrese el MES del problema (ejemplo: mayo): " << endl;
+		getline(cin, mes);
+		file << "\t";
+		file << mes;
+		cout << "Ingrese el DIA del problema (ejemplo: 12): " << endl;
+		getline(cin, t_dia);
+		file << "\t";
+		file << t_dia;
+		cout << "Ingrese en que OPERACION presento problemas (ejemplo: cambio): " << endl;
+		getline(cin, operacion);
+		file << "\t";
+		file << operacion;
+		cout << "Ingrese la cantidad de PROBLEMAS que tuvo al realizar la operacion (ejemplo: 2): " << endl;
+		getline(cin, t_problemas);
+		file << "\t";
+		file << t_problemas;
+		cout << "Ingrese la CANTIDAD de cambio realizado (s/ o $$): " << endl;
+		getline(cin, t_cantidad);
+		file << "\t";
+		file << t_cantidad;
+		file << "\n";
+
+		anios = stoi(t_anios);
+		dia = stoi(t_dia);
+		problemas = stoi(t_problemas);
+		cantidad = stof(t_cantidad);
+
+		registros.insertar(Register(anios, nombre, estado, contacto, mes, dia, operacion, problemas, cantidad));
+
+
+
+		cout << "GRACIAS POR REPORTAR TU PROBLEMA, TE ATENDEREMOS PRONTO !! \n";
+		system("pause");
+
+		file.close();
 	}
 
-	_getch();
-	return 0;
-}*/
+
+};
+
