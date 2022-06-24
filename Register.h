@@ -30,6 +30,7 @@ public:
 	string get_trabajo() {
 		return trabajo;
 	}
+	// funcion hash
 	int hash_this() {
 		int code = 1e8;
 		code += int(cantidad) % 10 * pow(10, 0);
