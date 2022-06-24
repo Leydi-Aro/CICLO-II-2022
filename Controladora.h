@@ -266,18 +266,20 @@ public:
 			{
 
 				Dataset ds;
+
 				bool run = true;
 				short opcion;
 				while (run)
 				{
 					system("cls");
-					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDOS ||" << endl
+					cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDO INGRESA TU REPORTE ||" << endl
 						 << endl;
 					cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
 					cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;
 					cout << "\n\t\t\t\t\t\t 3. - Mostrar postOrden" << endl;
-					cout << "\n\t\t\t\t\t\t 4. - Cantidad" << endl;
-					cout << "\n\t\t\t\t\t\t 5. - Salir" << endl;
+					cout << "\n\t\t\t\t\t\t 4. - Ingresar Reporte" << endl;
+					cout << "\n\t\t\t\t\t\t 5. - Cantidad" << endl;
+					cout << "\n\t\t\t\t\t\t 6. - Salir" << endl;
 					cout << "\n\t\t\t\t\t\t Ingrese un numero: ";
 					cin >> opcion;
 
@@ -303,12 +305,17 @@ public:
 					}
 					case 4:
 					{
+						ds.writeTSV();
+						break;
+					}
+					case 5:
+					{
 						cout << "\n\n"
 							 << ds.size();
 						_getch();
 						break;
 					}
-					case 5:
+					case 6:
 					{
 						run = false;
 						break;

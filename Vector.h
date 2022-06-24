@@ -91,4 +91,22 @@ public:
             }
         }
     }
+
+    void OrdenamientoMergesort(function<bool(T,T)>C){
+        if(size>1){
+            int mitad = size/2;
+            Vector<T> izq(mitad);
+            Vector<T> der(size-mitad);
+            for(int i = 0; i<mitad; i++){
+                izq.pushback(arr[i]);
+            }
+            for(int i = mitad; i<size; i++){
+                der.pushback(arr[i]);
+            }
+            izq.OrdenamientoMergesort(C);
+            der.OrdenamientoMergesort(C);
+            OrdenamientoMerge(izq,der,C);
+        }
+        swap(&arr[0],&arr[size-1]);
+    }
 };

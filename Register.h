@@ -45,7 +45,7 @@ class Dataset {
 	ArbolB<Register> registros;
 public:
 	Dataset() {
-		readTSV("data.csv");
+		readTSV("Archivos/Dataset/data.csv");
 	}
 	void readTSV(string name = "", bool header = true) {//campos separados por tab o espacios
 		ifstream file(name);
@@ -154,55 +154,3 @@ public:
 
 
 };
-
-int main() {
-
-	Dataset ds;
-
-	bool run = true;
-	short opcion;
-	while (run)
-	{
-		system("cls");
-		cout << "\n\n\n\n\t\t\t\t\t\t      || BIENVENIDO INGRESA TU REPORTE ||" << endl << endl;
-		cout << "\n\t\t\t\t\t\t 1. - Mostrar enOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 2. - Mostrar preOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 3. - Mostrar postOrden" << endl;
-		cout << "\n\t\t\t\t\t\t 4. - Ingresar Reporte" << endl;
-		cout << "\n\t\t\t\t\t\t 5. - Cantidad" << endl;
-		cout << "\n\t\t\t\t\t\t 6. - Salir" << endl;
-		cout << "\n\t\t\t\t\t\t Ingrese un numero: ";
-		cin >> opcion;
-
-		switch (opcion) {
-		case 1: {
-			ds.print();
-			_getch();
-			break; }
-		case 2: {
-			ds.printPre();
-			_getch();
-			break; }
-		case 3: {
-			ds.printPost();
-			_getch();
-			break; }
-		case 4: {
-			ds.writeTSV();
-			break; }
-		case 5: {
-			cout << "\n\n" << ds.size();
-			_getch();
-			break; }
-		case 6: {
-			run = false;
-			break;
-		}
-
-		}
-
-	}
-
-	_getch();
-	return 0;
-}
